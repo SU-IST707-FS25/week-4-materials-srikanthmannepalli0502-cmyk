@@ -1,78 +1,73 @@
-# Assignment Feedback: Week 4: Dimensionality Reduction
+# Assignment Feedback: Week 04 Dimensionality Reduction
 
 **Student:** srikanthmannepalli0502-cmyk
-**Total Score:** 17/40 (42.5%)
-
-**Grade Category:** F (Failing)
+**Raw Score:** 44/50 (88.0%)
+**Course Points Earned:** 68.0
 
 ---
 
 ## Problem Breakdown
 
-### Exercise 1 (6/16 = 37.5%)
-
-**Part pipeline-part1** (pipeline-part1.code): 0/0 points
-
-_Feedback:_ Good work: you fit PCA to 2 components and plotted the 2D projection colored by labels, which meets the goal. Optional improvements: report explained_variance_ratio_ and/or show inverse_transform reconstructions to visualize approximations of digits.
-
-**Part pipeline-part2** (pipeline-part2.code): 1/4 points
-
-_Feedback:_ You fit PCA and made a scree plot, but the task was to reduce to 2 components and show a 2D scatter colored by class. Missing n_components=2, transform, and scatter of the first two PCs with c=y_mnist_train and axis/title labels. Reuse your pca_2d setup.
-
-**Part pipeline-part3** (pipeline-part3.code): 1/4 points
-
-_Feedback:_ Your code computes components to reach 95% variance but does not produce the required scree plot. Missing: per-component variance for first 40 PCs, plot, and percent on y-axis. Use your prior PCA with 40 comps (e.g., pca_full.explained_variance_ratio_[:40]*100) and plot it.
-
-**Part pipeline-part4** (pipeline-part4.code): 4/4 points
-
-_Feedback:_ Good job. You correctly used the prefit pca_95 (n_components=0.95) and surfaced the number of components via pca_95.n_components_ in the plot title. This satisfies calculating/reporting the count for 95% variance, and the reconstruction is a nice validation.
-
-**Part pipeline-part5** (pipeline-part5.code): 0/4 points
-
-_Feedback:_ Your submission trains KNN and applies PCA(0.80) but does not address the task: visualize a digit using the Step 4 dimensionality (pca_95.n_components_). No transform/inverse_transform or plotting of the digit is done. Use pca_95, reconstruct a digit, and plot with plot_mnist_dig
-
----
-
-### Exercise 2 (8/10 = 80.0%)
+### Exercise 2 (10/10 = 100.0%)
 
 **Part ex1-part1** (ex1-part1.code): 4/4 points
 
-_Feedback:_ Excellent. You reduced dimensionality with PCA then applied t-SNE, colored by labels, and produced a clear 2D visualization. Sensible hyperparameters (init='pca', learning_rate='auto', perplexity=30). Meets the exercise goal fully.
+_Feedback:_ Excellent. You correctly applied t-SNE (with a sensible PCA(50) pre-step), used labels for coloring, and produced a clear 2D visualization. Parameters are appropriate and reproducible. Consider subsampling for speed on full MNIST if runtime is high.
 
-**Part ex1-part2** (ex1-part2.code): 2/3 points
+**Part ex1-part2** (ex1-part2.code): 3/3 points
 
-_Feedback:_ Good use of KNN on t-SNE features and you reported accuracy. However, you fit PCA/t-SNE on the combined train+test set, causing data leakage and inflating performance. Split first and avoid fitting on test (or evaluate via CV on train). Otherwise solid attempt.
+_Feedback:_ Good job: you trained KNN on 2D t-SNE features and reported accuracy. Your pipeline works and you even noted the leakage caveat from fitting t-SNE on all data. For cleaner evaluation, fit t-SNE on train only (though t-SNE lacks transform).
 
-**Part ex1-part3** (ex1-part3.code): 2/3 points
+**Part ex1-part3** (ex1-part3.code): 3/3 points
 
-_Feedback:_ You correctly trained KNN and computed accuracy with a proper train/test split. However, this exercise asked to compute KNN accuracy based on prior work (t-SNE/PCA). You switched to UMAP features instead. Good technique, but not aligned with the specified prior work.
+_Feedback:_ Correct: you used UMAP features and computed KNN accuracy. Fit on train and transform test avoids leakage, and k=3 is reasonable. Using 50D UMAP is fine. Nice work.
 
 ---
 
-### Exercise 4 (3/14 = 21.4%)
+### Exercise 4 (14/20 = 70.0%)
 
-**Part ex2-part1** (ex2-part1.code): 0/0 points
+**Part ex2-part1** (ex2-part1.code): 7/7 points
 
-_Feedback:_ You correctly applied PCA (2D/3D), visualized 2D, and evaluated KNN—good start. However, you didn’t include UMAP or vary its parameters, and dimension sweep was minimal. Add UMAP (e.g., n_neighbors, min_dist) and compare KNN accuracies and plots across dims.
+_Feedback:_ Good job. You applied PCA (2D/3D), visualized the 2D projection, trained KNN on PCA-transformed data, and reported test accuracy. This meets the task goals. As an optional improvement, you could also try PCA by variance (e.g., PCA(0.9)).
 
-**Part ex2-part2** (ex2-part2.code): 3/7 points
+**Part ex2-part2** (ex2-part2.code): 7/7 points
 
-_Feedback:_ You implemented UMAP + KNN, not PCA as requested. This does not use your prior PCA work, so the main objective isn’t met. The pipeline and evaluation are otherwise sound. To earn credit, fit/transform with PCA and report/plot PCA-based results.
+_Feedback:_ Well done. You correctly applied UMAP across multiple dimensions, visualized the 2D embedding, and evaluated KNN accuracy on train/test transforms. Code structure mirrors prior PCA workflow appropriately. Commentary is reasonable. Full credit.
 
-**Part ex2-part3** (ex2-part3.answer): 0/7 points
+**Part ex2-part3** (ex2-part3.answer): 0/6 points
 
 _Feedback:_ Submission contains only placeholder text - no actual student work provided.
 
 ---
 
-## Additional Information
+### Exercise 1 (20/20 = 100.0%)
 
-This feedback was automatically generated by the autograder using LLM-based evaluation.
+**Part pipeline-part1** (pipeline-part1.code): 4/4 points
 
-**Generated:** 2025-10-27 18:51:26 UTC
+_Feedback:_ Excellent. You correctly apply PCA to 2 components and produce a clear 2D scatter colored by class, with labels and colorbar. Choice of cmap/tab10 and alpha is fine. This fully meets the task requirements.
 
-If you have questions about your grade, please reach out to the instructor.
+**Part pipeline-part2** (pipeline-part2.code): 4/4 points
+
+_Feedback:_ Excellent work. You fit PCA with 40 components on X_mnist_train, computed percent variance (ratio * 100), and plotted the first 40 components with clear labeling. This meets the scree plot requirements fully.
+
+**Part pipeline-part3** (pipeline-part3.code): 4/4 points
+
+_Feedback:_ Correct approach: using PCA with n_components=0.95 and reporting n_components_ directly computes the number of components for 95% variance. Aligned with instructions and prior data usage. Well done.
+
+**Part pipeline-part4** (pipeline-part4.code): 4/4 points
+
+_Feedback:_ Well done. You correctly used the PCA from Step 4 (pca_95) to reduce and reconstruct a digit, and visualized original vs reconstructed. Using transform/inverse_transform is appropriate. Using a test digit instead of train is fine here.
+
+**Part pipeline-part5** (pipeline-part5.code): 4/4 points
+
+_Feedback:_ Well done. You compared KNN with and without PCA, preserved ~80% variance via PCA(n_components=0.80), correctly fit on train and transformed test, and reported accuracies (and timing). Solid implementation meeting the objective.
 
 ---
 
-*Powered by [Grade-Lite](https://github.com/your-repo/grade-lite) Autograder*
+## Additional Information
+
+This feedback was automatically generated by the autograder.
+
+**Generated:** 2025-10-28 19:51:57 UTC
+
+If you have questions about your grade, please reach out to the instructor.
